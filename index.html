@@ -1,0 +1,125 @@
+<!-- Block 01: Head & Sticky Header -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tchap Furniture</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header sticky">
+    <div class="logo">Tchap Furniture</div>
+    <nav>
+      <a href="#products" class="btn small">Shop Now</a>
+      <a href="cart.html" class="btn small">Cart</a>
+    </nav>
+  </header>
+
+  <!-- Block 02: Hero with Rolling Header -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1 class="rolling-header">
+        <span id="roll-text" class="fade-in">Furniture that feels like home.</span>
+      </h1>
+      <p>Handcrafted. Elegant. Built for everyday living.</p>
+      <a href="#products" class="btn">View Our Furniture</a>
+    </div>
+  </section>
+
+  <!-- Block 03: Why Tchap Section -->
+  <section class="section light">
+    <h2>Why Tchap?</h2>
+    <p>We build furniture that transforms your home. Designed for real life, built with real care, and priced with real people in mind.</p>
+    <ul class="benefits">
+      <li>✅ Stylish, durable woodwork</li>
+      <li>✅ Affordable custom designs</li>
+      <li>✅ Local craftsmanship from East London</li>
+      <li>✅ Built to last with a premium finish</li>
+    </ul>
+  </section>
+
+  <!-- Block 04: Live Product Display (This is your only "catalogue") -->
+  <section id="products" class="section dark">
+    <h2>Explore Our Furniture</h2>
+
+    <div class="category">
+      <h3>Wardrobes</h3>
+      <div class="gallery">
+        <div class="product">
+          <img src="https://imgs.search.brave.com/qpD8-HDiOrRbvitQr9ws3QrCF3WR29lJKxAKeeqCt_A/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuZGFudWJlaG9t/ZS5jb20vbWVkaWEv/ZGgtc2VsbGVyL3Av/YXNzZXRzLzgxMDEw/MDcwMDc1Ni80MDB4/NDAwLzYvNDAzLzgx/MDEwMDcwMDc1Ni1z/cC02LTM2LmpwZz93/aWR0aD00MDA" alt="Wardrobe 1" />
+          <p>3-Door Wardrobe</p>
+          <p class="price">R3,500</p>
+          <button class="btn small" onclick="addToCart('3-Door Wardrobe', 3500)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img src="https://imgs.search.brave.com/Vu4GPHXvj85ShIqILY7QrkNQjbuQbm1IZIK7iijWxoc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wbmcu/cG5ndHJlZS5jb20v/dGh1bWJfYmFjay9m/aDI2MC9iYWNrZ3Jv/dW5kLzIwMjMxMDA0/L3BuZ3RyZWUtc3R5/bGlzaC13YXJkcm9i/ZS1hbmQtY296eS1h/cm1jaGFpci1vbi1h/LXBhc3RlbC1ncmVl/bi1iYWNrZ3JvdW5k/LWltYWdlXzEzNTgy/NDM0LnBuZw" alt="Wardrobe 2" />
+          <p>Sliding Wardrobe</p>
+          <p class="price">R4,200</p>
+          <button class="btn small" onclick="addToCart('Sliding Wardrobe', 4200)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="category">
+      <h3>Cupboards</h3>
+      <div class="gallery">
+        <div class="product">
+          <img src="https://imgs.search.brave.com/bIbRavlote89BDNgsgosofwfqWU9JW44v1kTt9uHv0Y/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi93YXJk/cm9iZS1vcGVuLWNs/b3NldC10aGluZ3Mt/d2FyZHJvYmUtb3Bl/bi1jbG9zZXQtdGhp/bmdzLWQtaWxsdXN0/cmF0aW9uLTEyNTI0/MTYwNy5qcGc" alt="Cupboard 1" />
+          <p>Kitchen Cupboard</p>
+          <p class="price">R2,300</p>
+          <button class="btn small" onclick="addToCart('Kitchen Cupboard', 2300)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img src="https://imgs.search.brave.com/yGV2RGsFWFRr5KeUGM7cli6DNM8H4WcicRb-VISkc60/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAyMy8x/Mi8yMC8xMy8zMC93/YXJkcm9iZS04NDU5/ODk4XzY0MC5qcGc" alt="Cupboard 2" />
+          <p>Utility Cupboard</p>
+          <p class="price">R1,900</p>
+          <button class="btn small" onclick="addToCart('Utility Cupboard', 1900)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Block 05: Testimonial Section -->
+  <section class="section light">
+    <h2>What Our Customers Say</h2>
+    <p><em>“The best furniture in East London! Affordable and top-quality. My living room has never looked this good.”</em></p>
+  </section>
+
+  <!-- Block 06: About Section -->
+  <section class="section highlight">
+    <h2>Who We Are</h2>
+    <p>Tchap Furniture is a proudly local business turning quality wood into timeless pieces. Whether you're furnishing your home, apartment, or office — we’re here to make your vision real.</p>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Tchap Furniture. All rights reserved.</p>
+  </footer>
+
+  <!-- Block 07: Scripts (Rolling header + Cart function) -->
+  <script>
+    const lines = [
+      "Furniture that feels like home.",
+      "Custom-built. Timeless. Affordable.",
+      "East London’s Finest Woodcraft."
+    ];
+    let i = 0;
+    const rollText = document.getElementById("roll-text");
+    function fadeText() {
+      rollText.classList.remove("fade-in");
+      void rollText.offsetWidth;
+      rollText.innerText = lines[i];
+      rollText.classList.add("fade-in");
+      i = (i + 1) % lines.length;
+    }
+    setInterval(fadeText, 3000);
+
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${name} added to cart!`);
+    }
+  </script>
+</body>
+</html>
