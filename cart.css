@@ -1,0 +1,107 @@
+/* cart.css */
+
+/* Base Styling */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff8f1;
+  color: #333;
+}
+/* Block 22: Sticky Footer Fix */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.section {
+  flex: 1; /* This allows the section to stretch and push footer down */
+}
+
+
+.site-header {
+  position: sticky;
+  top: 0;
+  background: #0b3d91;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-header nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.section {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+h2 {
+  color: #0b3d91;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #0b3d91;
+  margin-top: 2rem;
+}
+
+.cart-item {
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.btn {
+  background-color: #c17e50;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #e29155;
+}
+
+.btn.small {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+}
+
+.checkout-btn {
+  background-color: #28a745;
+}
+
+.checkout-btn:hover {
+  background-color: #218838;
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background: #061e40;
+  color: #aaa;
+  font-size: 0.9rem;
+}
