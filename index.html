@@ -1,126 +1,799 @@
-<!-- Block 01: Head & Sticky Header -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tchap Furniture</title>
+  <meta name="description" content="Tchap Furniture - Handcrafted, elegant furniture in East London. Custom designs at affordable prices.">
+  <title>Tchap Furniture | Quality Handcrafted Furniture in East London</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <header class="site-header sticky">
-    <div class="logo">Tchap Furniture</div>
-    <nav>
-      <a href="#products" class="btn small">Shop Now</a>
-      <a href="cart.html" class="btn small">Cart</a>
-    </nav>
-  </header>
+  <div id="home"></div>
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/27834163110?text=Hi%20Tchap%20Furniture!%20I'd%20like%20to%20inquire%20about%20your%20products." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
-  <!-- Block 02: Hero with Rolling Header -->
+  <header class="site-header">
+    <div class="logo"><a href="#home">Tchap Furniture</a></div>
+        <nav>
+            <a href="#products">Shop</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#" id="cart-toggle">
+                <i class="fas fa-shopping-cart"></i> 
+                <span id="cart-count">0</span>
+            </a>
+        </nav>
+    </header>
+
+  <!-- Hero Section -->
   <section class="hero">
     <div class="hero-text">
       <h1 class="rolling-header">
         <span id="roll-text" class="fade-in">Furniture that feels like home.</span>
       </h1>
       <p>Handcrafted. Elegant. Built for everyday living.</p>
-      <a href="#products" class="btn">View Our Furniture</a>
+      
+      <a href="#products" class="btn cta-btn" >View Our Collection</a>
     </div>
   </section>
 
-  <!-- Block 03: Why Tchap Section -->
-  <section class="section light">
-    <h2>Why Tchap?</h2>
+  <!-- Why Choose Us Section -->
+  <section class="section light" id="about">
+    <h2>Why Choose Tchap Furniture?</h2>
     <p>We build furniture that transforms your home. Designed for real life, built with real care, and priced with real people in mind.</p>
-    <ul class="benefits">
-      <li>✅ Stylish, durable woodwork</li>
-      <li>✅ Affordable custom designs</li>
-      <li>✅ Local craftsmanship from East London</li>
-      <li>✅ Built to last with a premium finish</li>
-    </ul>
+    
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <i class="fas fa-hammer"></i>
+        <h3>Local Craftsmanship</h3>
+        <p>Handmade in East London by skilled artisans</p>
+      </div>
+      <div class="benefit-card">
+        <i class="fas fa-ruler-combined"></i>
+        <h3>Custom Designs Available</h3>
+        <p>Tailored to fit your space and style</p>
+      </div>
+      <div class="benefit-card">
+        <i class="fas fa-wallet"></i>
+        <h3>Affordable Quality</h3>
+        <p>Premium materials at fair prices</p>
+      </div>
+      
+    </div>
   </section>
+ 
 
-  <!-- Block 04: Live Product Display (This is your only "catalogue") -->
+<!-- Message Box for notifications -->
+<div id="message-box" class="message-box"></div>
+  <!-- Product Gallery -->
   <section id="products" class="section dark">
-    <h2>Explore Our Furniture</h2>
+    <h2>Our Furniture Collection</h2>
+   
+     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #0b3d91;
+            --secondary: #c17e50;
+            --light: #f4f4f4;
+            --dark: #061e40;
+            --text: #333;
+            --text-light: #777;
+            --white: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
-    <div class="category">
-      <h3>Wardrobes</h3>
-      <div class="gallery">
-        <div class="product">
-          <img src="https://imgs.search.brave.com/qpD8-HDiOrRbvitQr9ws3QrCF3WR29lJKxAKeeqCt_A/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuZGFudWJlaG9t/ZS5jb20vbWVkaWEv/ZGgtc2VsbGVyL3Av/YXNzZXRzLzgxMDEw/MDcwMDc1Ni80MDB4/NDAwLzYvNDAzLzgx/MDEwMDcwMDc1Ni1z/cC02LTM2LmpwZz93/aWR0aD00MDA" alt="Wardrobe 1" />
-          <p>3-Door Wardrobe</p>
-          <p class="price">R3,500</p>
-          <button class="btn small" onclick="addToCart('3-Door Wardrobe', 3500)">Add to Cart</button>
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+        }
+
+        /* Cart Styles */
+        .cart-aside {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cart-item-total {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .remove-item {
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            background: #dc2626;
+        }
+
+        .whatsapp-button {
+            background-color: #25D366;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            width: 100%;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+        }
+
+        .whatsapp-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .clear-cart-button {
+            background-color: #ef4444;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            width: 100%;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .clear-cart-button:hover {
+            background-color: #dc2626;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.25rem;
+            padding: 1rem 0;
+            border-top: 2px solid #eee;
+            color: #333;
+        }
+
+        .message-box {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .message-box.show {
+            opacity: 1;
+        }
+
+        .message-box.error {
+            background-color: #f44336;
+        }
+
+        /* Product Styles */
+        .category-section {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart-btn {
+            background: #25D366;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Products Section -->
+            <div class="flex-1">
+                <!-- Cupboards Section -->
+                <section class="category-section">
+                    <h2 class="category-title">Cupboards</h2>
+                    <div class="product-grid" id="cupboards-grid">
+                        <!-- Cupboard products will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Wardrobes Section -->
+                <section class="category-section">
+                    <h2 class="category-title">Wardrobes</h2>
+                    <div class="product-grid" id="wardrobes-grid">
+                        <!-- Wardrobe products will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- TV Stands Section -->
+                <section class="category-section">
+                    <h2 class="category-title">TV Stands</h2>
+                    <div class="product-grid" id="tv-stands-grid">
+                        <!-- TV Stand products will be loaded here -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- Cart Section -->
+            <aside class="w-full lg:w-1/3 cart-aside">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Your Cart</h2>
+                <div id="cart-items" class="space-y-4">
+                    <p id="cart-empty-message" class="text-gray-500 text-center">Your cart is empty.</p>
+                </div>
+                <div id="cart-summary" class="mt-6 pt-4 border-t border-gray-200">
+                    <div class="cart-total">
+                        <span>Total:</span>
+                        <span id="cart-total">R0.00</span>
+                    </div>
+                    <button id="proceed-to-whatsapp" class="whatsapp-button" disabled>
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.5 3.42 1.46 4.91L2 22l5.25-1.39c1.47.81 3.19 1.25 4.79 1.25 5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zm.04 1.5c4.67 0 8.48 3.81 8.48 8.48s-3.81 8.48-8.48 8.48c-1.47 0-2.88-.38-4.14-1.03l-.3-.18-3.12.82.83-3.04-.2-.32c-.74-1.24-1.14-2.67-1.14-4.18 0-4.67 3.81-8.48 8.48-8.48zm5.05 6.13c-.27-.13-.99-.49-1.15-.55-.17-.07-.3-.07-.43.07-.17.2-.66.81-.81.97-.15.17-.3.18-.55.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.24-1.47-1.39-1.72-.15-.25 0-.39.11-.52.11-.13.2-.25.3-.39.1-.13.07-.25 0-.39-.07-.13-.66-1.61-.91-2.29-.24-.65-.48-.56-.66-.57-.17-.01-.37-.01-.55-.01-.17 0-.43.07-.66.3-.24.24-.91.89-.91 2.17 0 1.29.93 2.51 1.06 2.67.13.17 1.77 2.71 4.29 3.89 1.01.47 1.81.76 2.42.97.91.3 1.75.26 2.41.16.69-.1 1.99-.81 2.27-1.59.28-.79.28-1.47.2-1.59-.07-.13-.27-.2-.55-.34z"/>
+                        </svg>
+                        Order via WhatsApp
+                    </button>
+                    <button id="clear-cart" class="clear-cart-button">
+                        Clear Cart
+                    </button>
+                </div>
+            </aside>
         </div>
-        <div class="product">
-          <img src="https://imgs.search.brave.com/Vu4GPHXvj85ShIqILY7QrkNQjbuQbm1IZIK7iijWxoc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wbmcu/cG5ndHJlZS5jb20v/dGh1bWJfYmFjay9m/aDI2MC9iYWNrZ3Jv/dW5kLzIwMjMxMDA0/L3BuZ3RyZWUtc3R5/bGlzaC13YXJkcm9i/ZS1hbmQtY296eS1h/cm1jaGFpci1vbi1h/LXBhc3RlbC1ncmVl/bi1iYWNrZ3JvdW5k/LWltYWdlXzEzNTgy/NDM0LnBuZw" alt="Wardrobe 2" />
-          <p>Sliding Wardrobe</p>
-          <p class="price">R4,200</p>
-          <button class="btn small" onclick="addToCart('Sliding Wardrobe', 4200)">Add to Cart</button>
-        </div>
-      </div>
     </div>
 
-    <div class="category">
-      <h3>Cupboards</h3>
-      <div class="gallery">
-        <div class="product">
-          <img src="https://imgs.search.brave.com/bIbRavlote89BDNgsgosofwfqWU9JW44v1kTt9uHv0Y/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi93YXJk/cm9iZS1vcGVuLWNs/b3NldC10aGluZ3Mt/d2FyZHJvYmUtb3Bl/bi1jbG9zZXQtdGhp/bmdzLWQtaWxsdXN0/cmF0aW9uLTEyNTI0/MTYwNy5qcGc" alt="Cupboard 1" />
-          <p>Kitchen Cupboard</p>
-          <p class="price">R2,300</p>
-          <button class="btn small" onclick="addToCart('Kitchen Cupboard', 2300)">Add to Cart</button>
-        </div>
-        <div class="product">
-          <img src="https://imgs.search.brave.com/yGV2RGsFWFRr5KeUGM7cli6DNM8H4WcicRb-VISkc60/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAyMy8x/Mi8yMC8xMy8zMC93/YXJkcm9iZS04NDU5/ODk4XzY0MC5qcGc" alt="Cupboard 2" />
-          <p>Utility Cupboard</p>
-          <p class="price">R1,900</p>
-          <button class="btn small" onclick="addToCart('Utility Cupboard', 1900)">Add to Cart</button>
-        </div>
-      </div>
+    <!-- Message Box -->
+    <div id="message-box" class="message-box"></div>
+
+    <script>
+        // Product Data
+        const products = {
+            cupboards: [
+                {
+                    id: 'cup1',
+                    name: 'Kitchen Cupboard Set',
+                    description: 'Complete kitchen cupboard set with modern design and ample storage space.',
+                    price: 4500,
+                    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 'cup2',
+                    name: 'Bathroom Cupboard',
+                    description: 'Waterproof bathroom cupboard with mirror and multiple shelves.',
+                    price: 1800,
+                    image: 'https://images.unsplash.com/photo-1620626011761-996317b8d101?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 'cup3',
+                    name: 'Office Storage Cupboard',
+                    description: 'Professional office cupboard with lockable doors and adjustable shelves.',
+                    price: 2200,
+                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 'cup4',
+                    name: 'Living Room Display Cupboard',
+                    description: 'Elegant display cupboard with glass doors, perfect for showcasing items.',
+                    price: 3200,
+                    image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                }
+            ],
+            wardrobes: [
+                {
+                    id: 'war1',
+                    name: 'Double Door Wardrobe',
+                    description: 'Spacious double door wardrobe with hanging rail and shelves.',
+                    price: 5500,
+                    image: 'https://images.unsplash.com/photo-1551298370-8d3068707853?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 'war2',
+                    name: 'Corner Wardrobe',
+                    description: 'Space-saving corner wardrobe ideal for smaller bedrooms.',
+                    price: 4200,
+                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 'war3',
+                    name: 'Sliding Door Wardrobe',
+                    description: 'Modern sliding door wardrobe with mirror and internal organizers.',
+                    price: 6800,
+                    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 'war4',
+                    name: 'Walk-in Wardrobe System',
+                    description: 'Complete walk-in wardrobe system with custom shelving and drawers.',
+                    price: 12500,
+                    image: 'https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                }
+            ],
+            tvStands: [
+                {
+                    id: 'tv1',
+                    name: 'Modern TV Stand',
+                    description: 'Sleek modern TV stand with cable management and storage compartments.',
+                    price: 1500,
+                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 'tv2',
+                    name: 'Rustic Wood TV Stand',
+                    description: 'Handcrafted rustic wood TV stand with vintage appeal.',
+                    price: 2200,
+                    image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 'tv3',
+                    name: 'Corner TV Stand',
+                    description: 'Space-efficient corner TV stand perfect for smaller living rooms.',
+                    price: 1800,
+                    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 'tv4',
+                    name: 'Entertainment Center',
+                    description: 'Complete entertainment center with TV stand and side storage units.',
+                    price: 4500,
+                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+                }
+            ]
+        };
+
+        // Cart functionality
+        const cartItemsDiv = document.getElementById('cart-items');
+        const cartTotalSpan = document.getElementById('cart-total');
+        const cartEmptyMessage = document.getElementById('cart-empty-message');
+        const proceedToWhatsappBtn = document.getElementById('proceed-to-whatsapp');
+        const clearCartBtn = document.getElementById('clear-cart');
+        const messageBox = document.getElementById('message-box');
+
+        let cart = [];
+        const WHATSAPP_NUMBER = '27834163110';
+
+        // Load cart from localStorage
+        function loadCart() {
+            const savedCart = localStorage.getItem('tchapCart');
+            if (savedCart) cart = JSON.parse(savedCart);
+            updateCartDisplay();
+        }
+
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('tchapCart', JSON.stringify(cart));
+        }
+
+        // Add item to cart
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({...product, quantity: 1});
+            }
+            saveCart();
+            updateCartDisplay();
+            showMessage(`${product.name} added to cart!`);
+        }
+
+        // Remove item from cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            updateCartDisplay();
+            showMessage('Item removed from cart');
+        }
+
+        // Update cart display
+        function updateCartDisplay() {
+            cartItemsDiv.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartEmptyMessage.style.display = 'block';
+                proceedToWhatsappBtn.disabled = true;
+            } else {
+                cartEmptyMessage.style.display = 'none';
+                proceedToWhatsappBtn.disabled = false;
+
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    itemElement.innerHTML = `
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>Qty: ${item.quantity} × R${item.price.toFixed(2)}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <span class="cart-item-total">R${itemTotal.toFixed(2)}</span>
+                            <button onclick="removeFromCart('${item.id}')" class="remove-item">×</button>
+                        </div>
+                    `;
+                    cartItemsDiv.appendChild(itemElement);
+                });
+            }
+
+            cartTotalSpan.textContent = `R${total.toFixed(2)}`;
+        }
+
+        // Show notification message
+        function showMessage(message, type = 'success') {
+            messageBox.textContent = message;
+            messageBox.className = `message-box show ${type === 'success' ? '' : 'error'}`;
+            setTimeout(() => messageBox.classList.remove('show'), 3000);
+        }
+
+        // Generate WhatsApp order message
+        function generateWhatsAppOrder() {
+            let message = "Hello Tchap Furniture! I'd like to order:\n\n";
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                message += `- ${item.name} (${item.quantity} × R${item.price.toFixed(2)}) = R${itemTotal.toFixed(2)}\n`;
+                total += itemTotal;
+            });
+            
+            message += `\nTotal: R${total.toFixed(2)}\n\nPlease let me know about payment and delivery.`;
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // Clear cart
+        function clearCart() {
+            cart = [];
+            saveCart();
+            updateCartDisplay();
+            showMessage('Cart cleared');
+        }
+
+        // Render products
+        function renderProducts() {
+            // Render cupboards
+            const cupboardsGrid = document.getElementById('cupboards-grid');
+            products.cupboards.forEach(product => {
+                const productCard = createProductCard(product);
+                cupboardsGrid.appendChild(productCard);
+            });
+
+            // Render wardrobes
+            const wardrobesGrid = document.getElementById('wardrobes-grid');
+            products.wardrobes.forEach(product => {
+                const productCard = createProductCard(product);
+                wardrobesGrid.appendChild(productCard);
+            });
+
+            // Render TV stands
+            const tvStandsGrid = document.getElementById('tv-stands-grid');
+            products.tvStands.forEach(product => {
+                const productCard = createProductCard(product);
+                tvStandsGrid.appendChild(productCard);
+            });
+        }
+
+        // Create product card
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <img src="${product.image}" alt="${product.name}" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-description">${product.description}</p>
+                    <p class="product-price">R${product.price.toFixed(2)}</p>
+                    <button onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})" class="add-to-cart-btn">
+                        Add to Cart
+                    </button>
+                </div>
+            `;
+            return card;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart();
+            renderProducts();
+            
+            // Event listeners
+            proceedToWhatsappBtn.addEventListener('click', generateWhatsAppOrder);
+            clearCartBtn.addEventListener('click', clearCart);
+        });
+    </script>
+    
+    <div class="custom-request">
+      <p>Don't see what you're looking for?</p>
+      <a href="https://wa.me/27834163110?text=Hi%20Tchap%20Furniture!%20I'd%20like%20to%20discuss%20a%20custom%20furniture%20piece." class="btn outline-btn" target="_blank">
+        Request Custom Furniture
+      </a>
     </div>
   </section>
 
-  <!-- Block 05: Testimonial Section -->
+  <!-- Testimonials -->
   <section class="section light">
-    <h2>What Our Customers Say</h2>
-    <p><em>“The best furniture in East London! Affordable and top-quality. My living room has never looked this good.”</em></p>
+    <h2>Happy Customers</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <div class="rating">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p>"The best furniture in East London! Affordable and top-quality. My living room has never looked this good."</p>
+        <div class="customer">- Thando M., Southernwood</div>
+      </div>
+      <div class="testimonial">
+        <div class="rating">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p>"Ordered a custom wardrobe via WhatsApp - the process was so easy and the result exceeded my expectations!"</p>
+        <div class="customer">- Sipho K., Nahoon</div>
+      </div>
+    </div>
   </section>
 
-  <!-- Block 06: About Section -->
+  <!-- About Section -->
   <section class="section highlight">
-    <h2>Who We Are</h2>
-    <p>Tchap Furniture is a proudly local business turning quality wood into timeless pieces. Whether you're furnishing your home, apartment, or office — we’re here to make your vision real.</p>
+    <div class="about-content">
+      <div class="about-text">
+        <h2>Our Story</h2>
+        <p>Tchap Furniture is a proudly local business turning quality wood into timeless pieces. Founded in East London, we combine traditional craftsmanship with modern designs.</p>
+        <p>Whether you're furnishing your home, apartment, or office — we're here to make your vision real with personalized service and attention to detail.</p>
+      </div>
+      <div class="about-image">
+        <img src="https://imgs.search.brave.com/MQv0HtmbQNq7bqMk964swJLlM_K-rbaaxOqiTjAo1mE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/c2h1dHRlcnN0b2Nr/LmNvbS9pbWFnZS1w/aG90by95b3VuZy1i/bGFjay1oYXBweS1j/YXJwZW50ZXItc2F3/aW5nLTI2MG53LTE0/MDYxNDcxMzUuanBn" alt="Carpenter at work" loading="lazy">
+      </div>
+    </div>
   </section>
-<!-- Block 07: Contact & Location Section -->
-<section class="section light">
-  <h2>Visit Us or Get in Touch</h2>
-  <p>
-    📍 Based in 244 Oxford St, Southernwood, East London, 5201 across John Forbes Pharmacy in Southernwood<br />
-    Local furniture crafted with care for our community.
-  </p>
-  <div class="social-links">
-    <a href="https://wa.me/27834163110" target="_blank" aria-label="Chat on WhatsApp">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/whatsapp.svg" alt="WhatsApp" />
-    </a>
-    <a href="https://facebook.com/YourPageHere" target="_blank" aria-label="Visit us on Facebook">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg" alt="Facebook" />
-    </a>
-  </div>
-</section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section light">
+    <h2>Visit Us</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3><i class="fas fa-map-marker-alt"></i> Our Workshop</h3>
+        <p>244 Oxford St, Southernwood<br>East London, 5201<br>(Across John Forbes Pharmacy)</p>
+        
+        <h3><i class="fas fa-clock"></i> Hours</h3>
+        <p>Monday - Friday: 8:30am - 5pm<br>Saturday: 9am - 1pm<br>Closed Sundays</p>
+      </div>
+      
+      <div class="contact-methods">
+        <h3>Get In Touch</h3>
+        <a href="https://wa.me/27834163110" class="contact-method whatsapp" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+          <div>
+            <span>Chat on WhatsApp</span>
+            <small>Fastest response</small>
+          </div>
+        </a>
+        
+        <a href="tel:+27834163110" class="contact-method phone">
+          <i class="fas fa-phone-alt"></i>
+          <div>
+            <span>Call Us</span>
+            <small>083 416 3110</small>
+          </div>
+        </a>
+        
+        <a href="https://facebook.com/YourPageHere" class="contact-method facebook" target="_blank">
+          <i class="fab fa-facebook-f"></i>
+          <div>
+            <span>Message on Facebook</span>
+            <small>See our latest work</small>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <footer class="footer">
-    <p>&copy; 2025 Tchap Furniture. All rights reserved.</p>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <div class="logo">Tchap Furniture</div>
+        <p>Handcrafted furniture in East London</p>
+      </div>
+      
+      <div class="footer-links">
+        <a href="#products">Shop</a>
+        <a href="#contact">Contact</a>
+        <a href="https://wa.me/27834163110" target="_blank">Order Now</a>
+      </div>
+      
+      <div class="footer-social">
+        <a href="https://wa.me/27834163110" target="_blank" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://facebook.com/YourPageHere" target="_blank" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Tchap Furniture. All rights reserved.</p>
+    </div>
   </footer>
 
-  <!-- Block 07: Scripts (Rolling header + Cart function) -->
   <script>
+    // Rolling header text
     const lines = [
       "Furniture that feels like home.",
       "Custom-built. Timeless. Affordable.",
-      "East London’s Finest Woodcraft."
+      "East London's Finest Woodcraft."
     ];
     let i = 0;
     const rollText = document.getElementById("roll-text");
+    
     function fadeText() {
       rollText.classList.remove("fade-in");
       void rollText.offsetWidth;
@@ -130,12 +803,15 @@
     }
     setInterval(fadeText, 3000);
 
-    function addToCart(name, price) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push({ name, price });
-      localStorage.setItem("cart", JSON.stringify(cart));
-      alert(`${name} added to cart!`);
-    }
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
   </script>
 </body>
 </html>
