@@ -558,8 +558,12 @@ a {
 }
 
 .about-image img {
-  border-radius: 8px;
-  box-shadow: var(--shadow);
+  width: 60%;       /* adjust between 50–70% */
+  max-width: 500px; /* prevents it from getting too large on big screens */
+  border-radius: 15px;
+  object-fit: cover;
+  margin: auto;
+  display: block;
 }
 
 /* Contact Section */
